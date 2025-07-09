@@ -62,6 +62,9 @@
                     {{form.author}}
                 </div>
                 <div>
+                    {{form.email}}
+                </div>
+                <div>
                     {{form.body}}
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -69,9 +72,8 @@
 
             <h3>Comments:</h3>
             {% for comment in comments %}
-            <p>
-                On {{comment.created_on.date }} <b> {{comment.author}}</b> wrote:
-            </p>
+            <p>{{comment.created_on.date }} </p>
+            <p>{{comment.author}}   <a href="">{{comment.email}}</a> </p>
             <p>
                 {{ comment.body | linebreaks }}
             </p>

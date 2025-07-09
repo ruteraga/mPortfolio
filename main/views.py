@@ -40,6 +40,7 @@ def blog_detail(request, pk):
         if form.is_valid():
             comment=Comment(
                 author=form.cleaned_data["author"],
+                email=form.cleaned_data["email"],
                 body=form.cleaned_data["body"],
                 post=post,
             )
