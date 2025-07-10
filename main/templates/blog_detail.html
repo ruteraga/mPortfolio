@@ -45,6 +45,7 @@
     <!--Post Details-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
+            <h2 class="mb-0">{{post.title}}</h2 >
             <small>
                 {{ post.created_on.date }} | Categories:
                 {% for category in post.categories.all %}
@@ -68,18 +69,24 @@
                     {{form.body}}
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-            <h3>Comments:</h3>
-            {% for comment in comments %}
-            <p>{{comment.created_on.date }} </p>
-            <p>{{comment.author}}   <a href="">{{comment.email}}</a> </p>
-            <p>
-                {{ comment.body | linebreaks }}
-            </p>
-            {%endfor%}
+            </form> 
+            <div class="comment-section">
+                <h3>Comments:</h3>
+                {% for comment in comments %}
+                    <div class="comment">
+                        <img src="{%static 'icon/user.png'%}" alt="User avatar" class="social_avatar">
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="commenter-name">{{comment.author}}</span>
+                                <span class="comment-date">{{comment.created_on.date}}</span>
+                            </div>
+                            <p class="comment-text">{{comment.body | linebreaks}}</p>
+                        </div>
+                    </div>
+                {%endfor%}
+            </div>
         </div>
-    </section>
+    </section>  
 
 {% endblock content %}
 
