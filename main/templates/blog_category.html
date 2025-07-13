@@ -1,5 +1,85 @@
-{% extends "blog.html" %}
+ {% load static%}
 
-{%block page_title%}
-<h2>{{category}}</h2>
-{%endblock page_title%}
+<head>
+    <title> {% block title %}{{category}} Page{% endblock title%}</title>
+</head>
+
+
+{% block extrahead%}
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="media/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{%static 'css/styles.css'%}" rel="stylesheet" />
+{%endblock extrahead%}
+ <!--blog index page-->
+
+
+ {% block content %}
+      <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">PORTFOLIO</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/home">Home</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/project">Projects</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/blog">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <!--Blog Posts-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Blogs Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{category}}</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <br>
+            {%block posts%}
+                {%for post in posts%}
+                    <h4 class="mb-0"><a href="{% url 'blog_detail' post.pk %}">{{post.title}}</a></h4>
+                    <small>
+                        {{post.created_on.date}} | Categories:
+                        {% for category in post.categories.all%}
+                            <a href="{% url 'blog_category' category.name%}">
+                                {{category.name}}
+                            </a>
+                        {%endfor%}
+                    </small>
+                    <p class="masthead-subheading font-weight-light mb-0">{{post.body | slice:":400"}}...</p>
+                    <br>
+                {%endfor%}
+            {%endblock posts%}
+        </div>
+    </section>
+
+    
+ {%endblock content%}
+
+ {% block extra_js %}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{%static 'js/scripts.js'%}"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+{% endblock %}
