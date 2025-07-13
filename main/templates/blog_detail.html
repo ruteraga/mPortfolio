@@ -70,17 +70,17 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form> 
-            <div class="comment-section">
+            <div class="comment-section" style="font-family: 'Arial', sans-serif; max-width: 600px;margin: 20px auto;">
                 <h3>Comments:</h3>
                 {% for comment in comments %}
-                <div class="comment" style="border: 1px solid red;"> <!-- Debug border -->
-                    <img src="{% static 'icon/user.png' %}" alt="User avatar" class="social_avatar" style="border: 1px solid blue;">
-                    <div class="comment-content" style="border: 1px solid green;">
-                        <div class="comment-header">
-                            <span class="commenter-name" style="color: purple;">{{comment.author}}</span>
-                            <span class="comment-date" style="color: orange;">{{comment.created_on.date}}</span>
+                <div class="comment" style="display:flex;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #eee;"> 
+                    <img src="{% static 'icon/user.png' %}" alt="User avatar" class="social_avatar" style="border: 1px; width:50px; height:50px;border-radius:50%;object-fit:cover;margin-right:15px">
+                    <div class="comment-content" style="flex:1">
+                        <div class="comment-header" style="display:flex;align-items:center;margin-bottom:5px">
+                            <span class="commenter-name" style="font-weight:bold;margin-right:10px">{{comment.author}}</span> 
+                            <span class="comment-date" style="color:#777; font-size:0.9em">{{comment.created_on.date}}</span>
                         </div>
-                        <p class="comment-text" style="color: brown;">{{comment.body|linebreaks}}</p>
+                        <p class="comment-text" style="line-height:1.4">{{comment.body|linebreaks}}</p>
                     </div>
                 </div>
                 {% endfor %}
